@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import psa.t1.v1.models.Ligante;
+import psa.t1.v1.repository.EventoRepository;
 import psa.t1.v1.repository.LiganteRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +21,9 @@ public class LiganteController {
 
     @Autowired
     private LiganteRepository liganteRepository;
+
+    @Autowired
+    private EventoRepository eventoRepository;
 
 
     @PostMapping("/cadastrar")
@@ -46,6 +50,7 @@ public class LiganteController {
     @GetMapping("/listar")
     public ResponseEntity<?> listarLigantes() {
         return ResponseEntity.ok(liganteRepository.findAll());
-    }
+    }   
+
     
 }
