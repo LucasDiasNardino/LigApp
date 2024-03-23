@@ -24,19 +24,13 @@ function atualizarSubmit() {
 }
 
 function generateQRCode(titulo) {
-    var GoogleChartAPI = 'https://chart.googleapis.com/chart?cht=qr&chs=400x500&chl=';
+  var GoogleChartAPI =
+    "https://chart.googleapis.com/chart?cht=qr&chs=400x500&chl=";
 
-    var contentQRCode = GoogleChartAPI+titulo;
+  var contentQRCode = GoogleChartAPI + titulo;
 
-    document.querySelector('#qrCode').src = contentQRCode;
-
+  document.querySelector("#qrCode").src = contentQRCode;
 }
-
-var edicaoModal = new bootstrap.Modal(document.getElementById("modalQrCode"));
-
-edicaoModal.show();
-
-generateQRCode("habibi");
 
 console.log("Modal de edição criado");
 
@@ -50,6 +44,36 @@ document.getElementById("submitEvento").addEventListener("click", function () {
   };
 
 
+  fetch("http://localhost:8080/evento/cadastrar", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+
+    body: JSON.stringify(dados),
+  })
+    .then(function (response) {
+      if (response.ok) {
+        console.log("Resposta ok");
+
+        var edicaoModal = new bootstrap.Modal(document.getElementById("modalQrCode"));
+
+        edicaoModal.show();
+
+        generateQRCode(titulo);
+
+        return response.text();
+      }
+
+    })
+    .then(function (text) {
+      console.log(text);
+    })
+    .catch(function (error) {
+      console.error(error);
+    });
+
+  
 
   //alert("Dados submetidos:", dados);
 
