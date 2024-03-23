@@ -30,12 +30,12 @@ public class LiganteController {
 
 
     @PostMapping("/cadastrar")
-    public ResponseEntity<Ligante> login(@RequestBody Ligante payload) {
+    public ResponseEntity<Ligante> cadastrar(@RequestBody Ligante payload) {
 
         // Gerar o login do ligante
         if (payload.getNome() != null){
             payload.gerarLogin();
-
+            payload.definirDataAtual();
             // Salvar o ligante no banco de dados
             liganteRepository.save(payload);
 

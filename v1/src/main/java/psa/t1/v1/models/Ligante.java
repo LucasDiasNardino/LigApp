@@ -1,5 +1,7 @@
 package psa.t1.v1.models;
 
+import java.time.LocalDate;
+
 import javax.persistence.Id;
 
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -19,10 +21,18 @@ public class Ligante {
     @Id
     private String id;
 
+    private LocalDate dataCadastro;
+
     private String nome;
     private String matricula;
 
     private String login;
+
+    public void definirDataAtual(){
+        // Definir a data de cadastro do ligante
+        this.dataCadastro = LocalDate.now();
+    }
+
 
     public String stripNome(String nome){
         // Dividir o nome completo em partes separadas
