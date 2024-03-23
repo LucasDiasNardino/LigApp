@@ -23,7 +23,7 @@ public class Evento {
     @Id
     private String id;
 
-    private String nome;
+    private String titulo;
     private String descricao;
     private LocalDate data;
     private List<Ligante> participantes;

@@ -18,3 +18,9 @@ var listarLigBut = document.getElementById("butListarLig");
 document.getElementById("butListarLig").addEventListener("click", function () {
     window.location.href = "listarLigante.html";
 });
+
+var novoEventoBut = document.getElementById("butNovoEvento");
+
+document.getElementById("butNovoEvento").addEventListener("click", function () {
+    window.location.href = "novoEvento.html";
+});

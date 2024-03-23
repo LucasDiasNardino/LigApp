@@ -114,19 +114,20 @@ function listarLigantes() {
 
 
 
-        var edicaoModal = new bootstrap.Modal(
-          document.getElementById("modalEdicao")
-        );
-        edicaoModal.show();
+        // var edicaoModal = new bootstrap.Modal(
+        //   document.getElementById("modalEdicao")
+        // );
 
-        console.log("Modal de edição criado");
+        // //definindo placeholders
+        // inputPlaceholder = document.getElementById("inputNome");
+
+        // inputPlaceholder.value = ligante.nome;
+
+        // edicaoModal.show();
+
+        // console.log("Modal de edição criado");
 
         
-
-
-
-
-
         document
           .getElementById(`deletar${tr.id}`)
           .addEventListener("click", function () {
