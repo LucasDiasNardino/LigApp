@@ -33,17 +33,17 @@ function listarLigantes() {
       "Content-Type": "application/json",
     },
   })
-  .then((response) => response.json())
-  .then((data) => {
-
-    var tablePlaceholder = document.getElementById("tablePlaceholder");
-    tablePlaceholder.innerHTML = `
+    .then((response) => response.json())
+    .then((data) => {
+      var tablePlaceholder = document.getElementById("tablePlaceholder");
+      tablePlaceholder.innerHTML = `
         <table id="tabelaLigantes" class="table" style="text-align:center">
                     <thead id="theadLigantes">
                       <tr>
                         <th scope="col">Nome</th>
                         <th scope="col">Matrícula</th>
                         <th scope="col">Data de Admissão</th>
+                        <th scope="col">Ações</th>
                       </tr>
                     </thead>
                     <tbody id="tbodyLigantes">
@@ -52,24 +52,31 @@ function listarLigantes() {
                 </table> 
     `;
 
-    console.log("thead criado com sucesso!");
+      console.log("thead criado com sucesso!");
 
-    // criar as linhas da tabela
+      // criar as linhas da tabela
 
-    var tbodyLigantes = document.getElementById("tbodyLigantes");
+      var tbodyLigantes = document.getElementById("tbodyLigantes");
 
-    data.forEach((ligante) => {
-      console.log(ligante);
-      var tr = document.createElement("tr");
-      tr.innerHTML = `
+      data.forEach((ligante) => {
+        console.log(ligante);
+        var tr = document.createElement("tr");
+        tr.id = ligante.id;
+        tr.innerHTML = `
             <td>${ligante.nome}</td>
             <td>${ligante.matricula}</td>
-            <td>${formatarData(ligante.dataAdmissao)}</td>
+            <td>${formatarData(ligante.dataCadastro)}</td>
+            <td>
+                <button id="editar${tr.id}"type="button" class="btn btn-primary ml-auto">Editar</button>
+                <button id="remover${tr.id}"type="button" class="btn btn-danger ml-auto">Remover</button>
+            </td>
         `;
 
-      tbodyLigantes.appendChild(tr);
+
+        console.log(tr.id)
+        tbodyLigantes.appendChild(tr);
+      });
     });
-  });
 
   console.log("tbody criado com sucesso!");
 }
