@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -27,10 +28,10 @@ public class EventoController {
     private LiganteRepository liganteRepository;
 
     @PostMapping("/cadastrar")
-    public ResponseEntity<Evento> postMethodName(@RequestBody Evento payload) {
+    public ResponseEntity<Evento> cadastrarEvento(@RequestBody Evento payload) {
         
-        //define localDate atual para o evento
-        payload.setData(java.time.LocalDate.now());
+        payload.definirDataAtual();
+        payload.inicializarListaParticipantes();
 
         // adicionar evento no banco de dados
         eventoRepository.save(payload);
@@ -39,8 +40,11 @@ public class EventoController {
     }
     
 
-    @RequestMapping(value = "/listar")
-    public ResponseEntity<?> listarEventos() {
-        return ResponseEntity.ok(eventoRepository.findAll());
-    }
+    @GetMapping(value = "/listar")
+    public ResponseEntity<Iterable<Evento>> listarEvento(){
+        Iterable<Evento> eventos = eventoRepository.findAll();
+        return ResponseEntity.ok(eventos);
+    }    
+
+    
 }

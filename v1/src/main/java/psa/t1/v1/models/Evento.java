@@ -1,6 +1,7 @@
 package psa.t1.v1.models;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Id;
@@ -26,4 +27,12 @@ public class Evento {
     private String descricao;
     private LocalDate data;
     private List<Ligante> participantes;
+
+    public void definirDataAtual() {
+        this.data = LocalDate.now();
+    }
+
+    public void inicializarListaParticipantes() {
+        this.participantes = new ArrayList<>();
+    }
 }
