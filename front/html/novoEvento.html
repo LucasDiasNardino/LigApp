@@ -37,11 +37,33 @@
             <button id="submitEvento" type="button" class="btn btn-success ml-auto" disabled>Realizar Chamada</button>
           </div>
         </div>   
-           
+
       </div>
 
-      <div id="placeholderImagem">
-        <img src="../../DIAGRAMA.png" alt="">
+      <!-- Modal QrCode -->
+      <div class="modal fade" id="modalQrCode" data-bs-dismiss="modal" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                Escaneie o código abaixo para cadastrar sua presença<a href=""></a>
+              </h1>
+              <button id="fecharModal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+        
+            <div class="modal-body">
+                <div class="d-flex justify-content-center">]
+                    <img id="qrCode" src="">
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button id="deletarModal" type="button" class="btn btn-danger">
+                Fechar 
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
 
 
