@@ -24,7 +24,7 @@ function atualizarSubmit() {
 }
 
 function generateQRCode(titulo) {
-    var GoogleChartAPI = 'https://chart.googleapis.com/chart?cht=qr&chs=500x500&chl=';
+    var GoogleChartAPI = 'https://chart.googleapis.com/chart?cht=qr&chs=400x500&chl=';
 
     var contentQRCode = GoogleChartAPI+titulo;
 
