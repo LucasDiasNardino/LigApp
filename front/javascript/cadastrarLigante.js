@@ -46,6 +46,21 @@ document.getElementById("submitLig").addEventListener("click", function () {
         //alert("Resposta ok");
         console.log("Resposta ok");
         return response.text();
+      }
+
+      //se servidor retornar bad request, exibir mensagem de erro
+      else if (response.status === 400) {
+        var placeholder = document.getElementById("placeholder");
+
+        placeholder.innerHTML = `
+          <div class="alert alert-danger" role="alert">
+              Ligante já cadastrado no sistema!
+          </div>
+        `;
+
+        //exibe div de
+
+        return response.json();
       } else {
         console.log("Resposta de erro do servidor");
         return Promise.reject(response);
@@ -56,11 +71,9 @@ document.getElementById("submitLig").addEventListener("click", function () {
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", data.user);
 
-      var successPlaceholder = document.getElementById("successPlaceholder");
+      var placeholder = document.getElementById("placeholder");
 
-
-
-      successPlaceholder.innerHTML = `
+      placeholder.innerHTML = `
         <div class="alert alert-success" role="alert">
             Ligante ${dados.nome} cadastrado com sucesso!
         </div>

@@ -34,6 +34,14 @@ public class LiganteController {
     @PostMapping("/cadastrar")
     public ResponseEntity<Ligante> cadastrar(@RequestBody Ligante payload) {
 
+
+        // verifica se já existe um ligante com a mesma matricula
+        Ligante ligante = liganteRepository.findByMatricula(payload.getMatricula());
+        if (ligante != null){
+            return ResponseEntity.badRequest().build();
+        }
+        
+
         // Gerar o login do ligante
         if (payload.getNome() != null){
             payload.gerarLogin();
