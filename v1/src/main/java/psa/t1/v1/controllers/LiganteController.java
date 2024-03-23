@@ -13,6 +13,8 @@ import psa.t1.v1.models.Evento;
 import psa.t1.v1.models.Ligante;
 import psa.t1.v1.repository.EventoRepository;
 import psa.t1.v1.repository.LiganteRepository;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -86,5 +88,12 @@ public class LiganteController {
 
         return "Login ou senha inválida";
     }
+ 
     
+    @SuppressWarnings("null")
+    @DeleteMapping("/deletar/{id}")
+    public ResponseEntity<?> deletarLigante(@PathVariable String id) {
+        liganteRepository.deleteById(id);
+        return ResponseEntity.ok().build();
+    }
 }

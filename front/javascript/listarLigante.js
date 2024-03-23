@@ -26,6 +26,26 @@ function formatarData(dataString) {
   return "Data Inválida";
 }
 
+
+
+function deletarLigante(id) {
+    fetch(`http://localhost:8080/ligante/deletar/${id}`, {
+        method: "DELETE",
+        headers: {
+        "Content-Type": "application/json",
+        },
+    })
+        .then((response) => {
+        console.log(response);
+        listarLigantes();
+        })
+        .catch((error) => {
+        console.error("Erro:", error);
+        });
+    
+}
+
+
 function listarLigantes() {
   fetch("http://localhost:8080/ligante/listar", {
     method: "GET",
@@ -67,14 +87,34 @@ function listarLigantes() {
             <td>${ligante.matricula}</td>
             <td>${formatarData(ligante.dataCadastro)}</td>
             <td>
-                <button id="editar${tr.id}"type="button" class="btn btn-primary ml-auto">Editar</button>
-                <button id="remover${tr.id}"type="button" class="btn btn-danger ml-auto">Remover</button>
+                <button id="editar${tr.id}"type="button" class="btn btn-primary ml-auto" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Editar</button>
+                <button id="deletar${tr.id}" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Deletar</button>
             </td>
         `;
 
 
         console.log(tr.id)
         tbodyLigantes.appendChild(tr);
+
+        document.getElementById(`deletar${tr.id}`).addEventListener("click", function () {
+        
+            // Abre o modal de confirmação
+            var confirmacaoModal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
+            confirmacaoModal.show();
+        
+            // Adiciona evento de clique ao botão de confirmação dentro do modal
+            document.getElementById('deletarModal').addEventListener("click", function () {
+                deletarLigante(tr.id);
+                console.log("Item com ID", tr.id, "deletado!");
+                
+                // Fecha o modal após a confirmação
+                confirmacaoModal.hide();
+
+                // Fecha o backdrop
+                document.querySelector('.modal-backdrop').remove();
+            });
+        });
+    
       });
     });
 
