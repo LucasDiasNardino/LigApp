@@ -1,9 +1,8 @@
 var voltar = document.getElementById("voltar");
 
 document.getElementById("voltar").addEventListener("click", function () {
-    window.location.href = "admin.html";
+  window.location.href = "admin.html";
 });
-
 
 /////////////////
 
@@ -14,48 +13,57 @@ var submitBut = document.getElementById("submitLig");
 nomeInput.addEventListener("input", atualizarSubmit);
 matricula.addEventListener("input", atualizarSubmit);
 
-//deixa botao desabilitado enquanto campos nao estiverem preenchidos
+// Função para atualizar o botão de submit
 function atualizarSubmit() {
-    var nomePreenchido = nomeInput.value.trim() !== "";
-    var matriculaPreenchida = matricula.value.trim() !== "";
+  // Verifica se ambos os campos estão preenchidos
+  var nomePreenchido = nomeInput.value.trim() !== "";
+  var matriculaPreenchido = matricula.value.trim() !== "";
 
-    submitBut.disabled = !(nomePreenchido && matriculaPreenchida);
+  // Habilita o botão se ambos os campos estiverem preenchidos, caso contrário, desabilita
+  submitBut.disabled = !(nomePreenchido && matriculaPreenchido);
 }
-
 document.getElementById("submitLig").addEventListener("click", function () {
-    var nome = document.getElementById("nome").value;
-    var matricula = document.getElementById("matricula").value;
+  var nome = document.getElementById("nome").value;
+  var matricula = document.getElementById("matricula").value;
 
-    var dados = {
-        nome: nome,
-        matricula: matricula
-    };
+  var dados = {
+    nome: nome,
+    matricula: matricula,
+  };
 
-    console.log("Dados submetidos:", dados);
+  //alert("Dados submetidos:", dados);
 
-    fetch('http://localhost:8080/ligantes/cadastrar', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
+  fetch("http://localhost:8080/ligante/cadastrar", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
 
-        body: JSON.stringify(dados)
-
-    }).then(function (response) {
-        if (response.ok) {
-            console.log("Resposta ok");
-            return response.text();
-        } else {
-            console.log("Resposta de erro do servidor");
-            return Promise.reject(response);
-        }
-    }).then(function (data) {
-        console.log("Resposta:", data);
-        alert("Ligante cadastrado com sucesso!");
-        window.location.href = "admin.html";
-
-    }).catch(function (error) {
-        console.log("Erro ao receber JSON:", error);
-        alert("Erro ao cadastrar ligante!");
+    body: JSON.stringify(dados),
+  })
+    .then(function (response) {
+      if (response.ok) {
+        //alert("Resposta ok");
+        console.log("Resposta ok");
+        return response.text();
+      } else {
+        console.log("Resposta de erro do servidor");
+        return Promise.reject(response);
+      }
     })
+    .then(function (data) {
+      console.log("Resposta:", data);
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", data.user);
+
+      var successPlaceholder = document.getElementById("successPlaceholder");
+
+
+
+      successPlaceholder.innerHTML = `
+        <div class="alert alert-success" role="alert">
+            Ligante ${dados.nome} cadastrado com sucesso!
+        </div>
+      `;
+    });
 });

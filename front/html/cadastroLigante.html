@@ -23,6 +23,7 @@
 
 
       <div>
+        <div id="successPlaceholder"></div>
         <div class="input-group mb-3">
           <span class="input-group-text">Nome</span>
           <input id="nome" type="text" class="form-control" placeholder="Nome">
@@ -30,14 +31,14 @@
         <div class="input-group mb-3">
           <span class="input-group-text">Matrícula</span>
           <input id="matricula" type="email" class="form-control" placeholder="Matrícula">
-        </div>
-
-       
-        <div id="submit" class="position-absolute top-50 start-50 translate-middle">
-            <button type="button" class="btn btn-success ml-auto" >Cadastrar Ligante</button>
+        </div> 
+        
+        <div class="d-flex justify-content-center">
+          <div>
+            <button id="submitLig" type="button" class="btn btn-success ml-auto" disabled>Cadastrar Ligante</button>
+          </div>
         </div>
         
-    
 
       </div>
 
