@@ -5,6 +5,74 @@ document.getElementById("sair").addEventListener("click", function () {
 });
 
 
+
+var cadastrarLigBut = document.getElementById("butCadastroLig");
+
+document.getElementById("butCadastroLig").addEventListener("click", function () {
+    window.location.href = "cadastroLigante.html";
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 *  Busca os reembolsos no banco e adiciona na lista
 */
