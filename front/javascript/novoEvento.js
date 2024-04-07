@@ -43,60 +43,39 @@ document.getElementById("submitEvento").addEventListener("click", function () {
     descricao: descricao,
   };
 
-
   fetch("http://localhost:8080/evento/cadastrar", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-
     body: JSON.stringify(dados),
   })
     .then(function (response) {
       if (response.ok) {
         console.log("Resposta ok");
-
-        var edicaoModal = new bootstrap.Modal(document.getElementById("modalQrCode"));
-
-        edicaoModal.show();
-
-        generateQRCode(titulo);
-
-        return response.text();
+        // Parse a resposta JSON
+        return response.json();
+      } else {
+        throw new Error("Erro ao cadastrar evento");
       }
-
     })
-    .then(function (text) {
-      console.log(text);
+    .then(function (data) {
+      // 'data' contém os dados retornados pelo servidor, incluindo o ID do evento
+      var eventoId = data.id; // Atribui o ID do evento retornado pelo servidor à variável eventoId
+
+      var edicaoModal = new bootstrap.Modal(document.getElementById("modalQrCode"));
+      edicaoModal.show();
+      generateQRCode(titulo);
+      return eventoId;
+    })
+    .then(function (eventoId) {
+      // Aqui você pode fazer algo com o ID do evento se necessário
+      console.log("ID do evento cadastrado:", eventoId);
+      // Redireciona para user.html com o ID do evento como path variable
+      window.location.href = "user.html?id=" + eventoId;
     })
     .catch(function (error) {
       console.error(error);
     });
 
-  
-
-  //alert("Dados submetidos:", dados);
-
-  //   fetch("http://localhost:8080/evento/cadastrar", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-
-  //     body: JSON.stringify(dados),
-  //   })
-  //     .then(function (response) {
-  //       if (response.ok) {
-  //         //alert("Resposta ok");
-  //         console.log("Resposta ok");
-  //         return response.text();
-  //       }
-
-  //     })
-  //     .then(function (text) {
-  //       console.log(text);
-  //     })
-  //     .catch(function (error) {
-  //       console.error(error);
-  //     });
 });
