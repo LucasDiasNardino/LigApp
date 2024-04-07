@@ -24,3 +24,9 @@ var novoEventoBut = document.getElementById("butNovoEvento");
 document.getElementById("butNovoEvento").addEventListener("click", function () {
     window.location.href = "novoEvento.html";
 });
+
+var listarEventosBut = document.getElementById("butListarEvento");
+
+document.getElementById("butListarEvento").addEventListener("click", function () {
+    window.location.href = "listarEventos.html";
+});

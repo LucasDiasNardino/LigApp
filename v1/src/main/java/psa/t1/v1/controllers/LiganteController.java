@@ -66,7 +66,7 @@ public class LiganteController {
     }   
 
     @PostMapping("/confirmarPresenca/{idEvento}")
-    public String confirmarPresenca(@RequestBody Ligante payload, @PathVariable String idEvento) {
+    public ResponseEntity<String> confirmarPresenca(@RequestBody Ligante payload, @PathVariable String idEvento) {
         /*
          * payload = login ligante + matricula
          * 
@@ -85,16 +85,17 @@ public class LiganteController {
         //valida dados do ligante
         Ligante ligante = liganteRepository.findByLogin(payload.getLogin());
         if (ligante == null){
-            return "Ligante não encontrado";
+            return ResponseEntity.badRequest().body("Login ou senha inválida");
         }
 
         if (ligante.getMatricula().equals(payload.getMatricula()) || ligante.getMatricula().equals(payload.getMatricula())){
             evento.getParticipantes().add(ligante);
             eventoRepository.save(evento);
-            return "Presença confirmada";
+            return ResponseEntity.ok("Presença confirmada");
         }
-
-        return "Login ou senha inválida";
+        else {
+            return ResponseEntity.badRequest().body("Login ou senha inválida");
+        }
     }
  
     
