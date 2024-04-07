@@ -3,8 +3,11 @@ package psa.t1.v1.controllers;
 import org.springframework.web.bind.annotation.RestController;
 
 import psa.t1.v1.models.Evento;
+import psa.t1.v1.models.Ligante;
 import psa.t1.v1.repository.EventoRepository;
 import psa.t1.v1.repository.LiganteRepository;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -46,5 +49,12 @@ public class EventoController {
         return ResponseEntity.ok(eventos);
     }    
 
+    
+    //listar participantes de evento específico
+    @GetMapping(value = "/listarParticipantes/{idEvento}")
+    public ResponseEntity<List<Ligante>> listarParticipantes(@RequestParam String idEvento){
+        Evento evento = eventoRepository.findById(idEvento).get();
+        return ResponseEntity.ok(evento.getParticipantes());
+    }
     
 }
